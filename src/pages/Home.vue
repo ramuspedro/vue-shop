@@ -1,18 +1,50 @@
 <!-- ./src/components/Home.vue -->
 <template>
   <div>
-    <div class="title">
-      <h1>{{msg}}</h1>
+    <div style="margin-top: 3rem;">
+      <TreeBrowser 
+      :node="root"
+      @onClick="nodeWasClicked"
+      />
     </div>
   </div>
 </template>
 
 <script>
+  import TreeBrowser from "../components/TreeBrowser";
   export default {
     name: 'home',
+    components: {
+      TreeBrowser
+    },
     data () {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        root: {
+          name: '/',
+          children: [
+            {
+              name: 'music',
+              children: [
+                {
+                  name: 'song.mp3'
+                }
+              ]
+            },
+            {
+              name: 'workspace',
+              children: [
+                {
+                  name: 'source.js'
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    methods: {
+      nodeWasClicked(node) {
+        alert(node.name)
       }
     }
   }
